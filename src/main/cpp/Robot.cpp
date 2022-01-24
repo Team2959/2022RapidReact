@@ -10,6 +10,7 @@
 #include "cwtech/Conditioning.h"
 #include <thread>
 #include "subsystems/Drivetrain.h"
+#include "subsystems/Vision.h"
 #include "cwtech/Logging.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <cwtech/Debug.h>
@@ -35,7 +36,7 @@ public:
 
     void TeleopPeriodic() override
     {
-        DriveWithJoystick(false);
+        DriveWithJoystick(true);
         m_swerve.UpdateOdometry();
         auto logLine = m_swerve.OutputOdometry();
         m_logging.Log(logLine);
@@ -50,6 +51,7 @@ public:
             m_haveSetInitalPositions = true;
         }
         m_swerve.UpdateDashboardOnUpdate();
+        m_vision.Periodic();
     }
 
     void TestPeriodic() override
@@ -67,6 +69,7 @@ private:
     cwtech::UniformConditioning m_conditioning{};
     Drivetrain m_swerve{this};
     Logging m_logging;
+    Vision m_vision;
 
     cwtech::DebugVariable m_debugX = Variable("Joystick/X", {0.0});
     cwtech::DebugVariable m_debugY = Variable("Joystick/Y", {0.0});
