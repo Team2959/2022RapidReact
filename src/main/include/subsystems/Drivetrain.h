@@ -15,13 +15,15 @@
 #include "Constants.h"
 
 #include "subsystems/SwerveModule.h"
+#include <frc2/command/SubsystemBase.h>
 
-class Drivetrain : public cwtech::Debug
+class Drivetrain : public cwtech::Debug, public frc2::SubsystemBase
 {
 public:
 	Drivetrain(Debug* parent = nullptr)
 		: cwtech::Debug("Drivetrain", parent)
 	{
+		SetName("Drivetrain"); // Sets name of subsystem
 		m_navX.Reset();
 	}
 
@@ -33,6 +35,7 @@ public:
 	void SetInitialSwervePositions();
 	void UpdateDashboardOnUpdate();
 	void DirectMotorDrive(bool drive, int motor, double percentage);
+	void Periodic() override;
 
 	frc::SwerveDriveKinematics<4> GetKinematics()
 	{
@@ -70,7 +73,7 @@ public:
 	}
 
 	static constexpr units::meters_per_second_t kMaxSpeed =
-		3.0_mps; // 3 meters per second
+		1.0_mps; // 3 meters per second
 	static constexpr units::radians_per_second_t kMaxAngularSpeed{
 		wpi::numbers::pi}; // 1/2 rotation per second
 

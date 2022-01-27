@@ -1,0 +1,9 @@
+{
+  "NetworkTables Settings": {
+    "mode": "Client",
+    "serverTeam": "1902"
+  },
+  "limelight": {
+    "open": true
+  }
+}

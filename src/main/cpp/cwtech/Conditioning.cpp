@@ -19,7 +19,7 @@ void cwtech::UniformConditioning::SetDeadband(double db)
 
 void cwtech::UniformConditioning::SetExponent(double expo)
 {
-    expo = std::fmax(expo, 1.0);
+    expo = std::fmax(expo, 0);
 
     m_power = expo;
 

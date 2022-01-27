@@ -5,6 +5,7 @@
 #include <frc/filter/SlewRateLimiter.h>
 #include <frc/TimedRobot.h>
 #include <frc/XboxController.h>
+#include <frc2/command/CommandScheduler.h>
 #include <frc/Joystick.h>
 
 #include "cwtech/Conditioning.h"
@@ -14,6 +15,9 @@
 #include "cwtech/Logging.h"
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <cwtech/Debug.h>
+#include <OI.h>
+#include <commands/TeleopDriveCommand.h>
+#include <commands/FollowTargetCommand.h>
 
 class Robot : public frc::TimedRobot, public cwtech::Debug
 {
@@ -22,22 +26,26 @@ public:
         : cwtech::Debug("Robot")
     {
     }
+
     void RobotInit() override
     {
-        m_conditioning.SetDeadband(0.2);
-        m_conditioning.SetExponent(4.0);
+        m_swerve.SetDefaultCommand(TeleopDriveCommand(&m_swerve, m_oi));
+        m_vision.SetDefaultCommand(FollowTargetCommand(&m_vision, m_oi));
+    }
+
+    void RobotPeriodic() override
+    {
+        frc2::CommandScheduler::GetInstance().Run();
     }
 
     void AutonomousPeriodic() override
     {
-        DriveWithJoystick(false);
-        m_swerve.UpdateOdometry();
+        // DriveWithJoystick(false);
     }
 
     void TeleopPeriodic() override
     {
-        DriveWithJoystick(true);
-        m_swerve.UpdateOdometry();
+        // DriveWithJoystick(true);
         auto logLine = m_swerve.OutputOdometry();
         m_logging.Log(logLine);
     }
@@ -51,18 +59,18 @@ public:
             m_haveSetInitalPositions = true;
         }
         m_swerve.UpdateDashboardOnUpdate();
-        m_vision.Periodic();
     }
 
     void TestPeriodic() override
     {
         auto drive = m_testDriveOrTurn.GetBoolean(true);
-        auto motor = (int)m_testMotorCorner.GetNumber(1.0);
-        auto percentage = m_testMotorPercentage.GetNumber(0.0);
+        // auto motor = (int)m_testMotorCorner.GetNumber(1.0);
+        // auto percentage = m_testMotorPercentage.GetNumber(0.0);
 
-        m_swerve.DirectMotorDrive(drive, motor, percentage);
+        // m_swerve.DirectMotorDrive(drive, motor, percentage);
     }
 
+    OI m_oi;
 private:
     // frc::XboxController m_controller{0};
     frc::Joystick m_joystick{0};

@@ -30,6 +30,11 @@ void Drivetrain::Drive(units::meters_per_second_t xSpeed,
 	m_backRight.SetDesiredState(br);
 }
 
+void Drivetrain::Periodic()
+{
+	UpdateOdometry();
+}
+
 void Drivetrain::UpdateOdometry()
 {
 	m_odometry.Update(m_navX.GetRotation2d(), m_frontLeft.GetState(),
