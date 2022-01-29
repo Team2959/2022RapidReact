@@ -17,6 +17,7 @@
 #include <cwtech/Debug.h>
 #include <OI.h>
 #include <commands/TeleopDriveCommand.h>
+#include <subsystems/Turret.h>
 #include <commands/FollowTargetCommand.h>
 
 class Robot : public frc::TimedRobot, public cwtech::Debug
@@ -31,6 +32,8 @@ public:
     {
         m_swerve.SetDefaultCommand(TeleopDriveCommand(&m_swerve, m_oi));
         m_vision.SetDefaultCommand(FollowTargetCommand(&m_vision, m_oi));
+        m_turret.OnStartup();
+        m_swerve.Startup();
     }
 
     void RobotPeriodic() override
@@ -59,6 +62,7 @@ public:
             m_haveSetInitalPositions = true;
         }
         m_swerve.UpdateDashboardOnUpdate();
+        m_startTimestamp = std::chrono::duration_cast<std::chrono::milliseconds>(hal::fpga_clock::now().time_since_epoch()).count();
     }
 
     void TestPeriodic() override
@@ -77,14 +81,16 @@ private:
     cwtech::UniformConditioning m_conditioning{};
     Drivetrain m_swerve{this};
     Logging m_logging;
-    Vision m_vision;
+    Vision m_vision{this};
+    Turret m_turret{this};
 
     cwtech::DebugVariable m_debugX = Variable("Joystick/X", {0.0});
     cwtech::DebugVariable m_debugY = Variable("Joystick/Y", {0.0});
     cwtech::DebugVariable m_testDriveOrTurn = Variable("Test/Drive or Turn", {true});
     cwtech::DebugVariable m_testMotorCorner = Variable("Test/Test Motor Corner", {1.0});
     cwtech::DebugVariable m_testMotorPercentage = Variable("Test/Motor Percentage", {0.0});
-
+    cwtech::DebugVariable m_time = Variable("Runtime", 0.0);
+    double m_startTimestamp = 0;
     bool m_haveSetInitalPositions = false;
 
     // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0

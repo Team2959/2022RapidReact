@@ -9,6 +9,7 @@
 #include <frc/kinematics/SwerveDriveOdometry.h>
 #include <frc/smartdashboard/SmartDashboard.h>
 #include <wpi/numbers>
+#include <frc/smartdashboard/SendableChooser.h>
 #include <AHRS.h>
 #include <cwtech/Debug.h>
 
@@ -20,11 +21,23 @@
 class Drivetrain : public cwtech::Debug, public frc2::SubsystemBase
 {
 public:
+
+	enum DriveType
+	{
+		Xbox,
+		Single,
+		Double,
+	};
+
 	Drivetrain(Debug* parent = nullptr)
 		: cwtech::Debug("Drivetrain", parent)
 	{
 		SetName("Drivetrain"); // Sets name of subsystem
 		m_navX.Reset();
+		
+		m_driveType.AddOption("Double", DriveType::Double);
+		m_driveType.AddOption("Xbox", DriveType::Xbox);
+		m_driveType.SetDefaultOption("Single", DriveType::Single);
 	}
 
 	void Drive(units::meters_per_second_t xSpeed,
@@ -73,10 +86,13 @@ public:
 	}
 
 	static constexpr units::meters_per_second_t kMaxSpeed =
-		1.0_mps; // 3 meters per second
+		1.5_mps; // 3 meters per second
 	static constexpr units::radians_per_second_t kMaxAngularSpeed{
 		wpi::numbers::pi}; // 1/2 rotation per second
 
+	DriveType GetDriveType();
+	bool GetFieldRelative() { return m_fieldCentric.GetBoolean(true); }
+	void Startup() { frc::SmartDashboard::PutData("Drive Type", &m_driveType); }
 private:
 	frc::Translation2d m_frontLeftLocation{+0.381_m, -0.381_m};
 	frc::Translation2d m_frontRightLocation{-0.381_m, -0.381_m};
@@ -102,4 +118,8 @@ private:
 		m_backRightLocation};
 
 	frc::SwerveDriveOdometry<4> m_odometry{m_kinematics, m_navX.GetRotation2d()};
+
+	frc::SendableChooser<DriveType> m_driveType;
+	cwtech::DebugVariable m_fieldCentric = Variable("Field Relative", true);
+
 };

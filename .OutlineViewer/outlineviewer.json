@@ -3,6 +3,15 @@
     "mode": "Client",
     "serverTeam": "1902"
   },
+  "SmartDashboard": {
+    "Robot": {
+      "Turret": {
+        "open": true
+      },
+      "open": true
+    },
+    "open": true
+  },
   "limelight": {
     "open": true
   }

@@ -24,9 +24,9 @@ private:
     cwtech::DebugVariable result = Variable("Target Distance", {0.0});
 
 public:
-    rev::CANSparkMax m_turret{29, rev::CANSparkMax::MotorType::kBrushless};
+    //rev::CANSparkMax m_turret{29, rev::CANSparkMax::MotorType::kBrushless};
 
-    Vision();
+    Vision(cwtech::Debug* parent = nullptr);
     void Periodic() override;
     double GetDistanceFromTargetWithHeight(units::meter_t height);
 

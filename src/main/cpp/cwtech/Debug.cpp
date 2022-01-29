@@ -1,5 +1,5 @@
 #include <cwtech/Debug.h>
-
+#include <iostream>
 #include <frc/smartdashboard/SmartDashboard.h>
 
 namespace cwtech
@@ -24,11 +24,17 @@ namespace cwtech
         {
             frc::SmartDashboard::PutBoolean(key, val);
         }
+        template<typename T>
+        void operator()(T t)
+        {
+            std::cerr << "DebugTypePutVistor: Invalid Smartdashboard type" << std::endl;
+        }
     };
 
     DebugVariable::DebugVariable(std::string key, DebugType defaultValue)
         : m_key(key), m_defaultValue(defaultValue)
     {
+        std::cerr << "cwtech::Debug: Created " << m_key << std::endl;
         DebugTypePutVistor vistor{m_key};
         std::visit(vistor, defaultValue);
     }
@@ -69,14 +75,23 @@ namespace cwtech
         std::string key = "";
         if(parent != nullptr)
         {
-            key = parent->m_key;
+            m_key = parent->m_key + '/' + m_name;
         }
-        m_key = key + '/' + m_name;
+        else
+        {
+            m_key = m_name;    
+        }
+        std::cerr << "cwtech::Debug: Created " << m_key << std::endl;
     }
 
     DebugVariable Debug::Variable(std::string name, DebugType defaultValue)
     {
         return DebugVariable(m_key + '/' + name, defaultValue);
+    }
+
+    std::string Debug::Key(std::string name)
+    {
+        return m_key + '/' + name;
     }
 
 

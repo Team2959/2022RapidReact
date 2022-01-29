@@ -3,8 +3,8 @@
 #include <networktables/NetworkTableInstance.h>
 #include <units/angle.h>
 
-Vision::Vision()
-     : cwtech::Debug("Vision")
+Vision::Vision(cwtech::Debug* parent)
+     : cwtech::Debug("Vision", parent)
 {
 }
 

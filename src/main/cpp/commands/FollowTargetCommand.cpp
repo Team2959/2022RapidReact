@@ -10,7 +10,7 @@ FollowTargetCommand::FollowTargetCommand(Vision* vision, OI& oi)
 }
 
 void FollowTargetCommand::Execute()
-{
+{/*
     double a = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx",0.0);
     if(a < 2 && a > -2)
     {
@@ -26,10 +26,10 @@ void FollowTargetCommand::Execute()
         {
             m_vision->m_turret.Set(-0.15);
         }
-    }
+    }*/
 }
 
 void FollowTargetCommand::End(bool interupt)
 {
-    m_vision->m_turret.Set(0);
+    //m_vision->m_turret.Set(0);
 }

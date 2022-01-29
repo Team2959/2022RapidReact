@@ -28,6 +28,8 @@ void Drivetrain::Drive(units::meters_per_second_t xSpeed,
 	m_frontRight.SetDesiredState(fr);
 	m_backLeft.SetDesiredState(bl);
 	m_backRight.SetDesiredState(br);
+
+	
 }
 
 void Drivetrain::Periodic()
@@ -89,4 +91,9 @@ void Drivetrain::UpdateDashboardOnUpdate()
 	m_frontRight.UpdateDashboardOnEnable();
 	m_backLeft.UpdateDashboardOnEnable();
 	m_backRight.UpdateDashboardOnEnable();
+}
+
+Drivetrain::DriveType Drivetrain::GetDriveType() 
+{
+	return m_driveType.GetSelected();
 }

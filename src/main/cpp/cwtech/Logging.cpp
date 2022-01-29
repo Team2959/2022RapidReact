@@ -27,11 +27,11 @@ void Logging::StartNewLogFile() {
         for(i = 0; std::ifstream{usbDirectory + "/" + random_str + std::to_string(i) + ".csv"}.good(); i++);
         filename = usbDirectory + "/" + random_str + std::to_string(i) + ".csv";
     }
-    std::cout << "Log File:" << filename << std::endl;
+    std::cerr << "Log File:" << filename << std::endl;
     m_logFile.open(filename);
     if(!m_logFile.good() || !m_logFile.is_open())
     {
-        std::cout << "Log File failed to open" << std::endl;
+        std::cerr << "Log File failed to open" << std::endl;
     }
     m_logFile << "timestamp,angle,poseX,poseY\n" << std::flush;
     frc::SmartDashboard::PutString("Odometry File", filename);

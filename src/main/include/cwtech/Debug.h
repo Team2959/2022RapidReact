@@ -35,6 +35,7 @@ class Debug
 public:
     Debug(std::string name, Debug* parent = nullptr);
     DebugVariable Variable(std::string name, DebugType defaultValue);
+    std::string Key(std::string name);
 private:
     std::string m_name;
     std::string m_key;
