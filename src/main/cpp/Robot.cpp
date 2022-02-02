@@ -19,6 +19,7 @@
 #include <commands/TeleopDriveCommand.h>
 #include <subsystems/Turret.h>
 #include <commands/FollowTargetCommand.h>
+#include <subsystems/ClimbSubsystem.h>
 
 class Robot : public frc::TimedRobot, public cwtech::Debug
 {
@@ -74,7 +75,6 @@ public:
         // m_swerve.DirectMotorDrive(drive, motor, percentage);
     }
 
-    OI m_oi;
 private:
     // frc::XboxController m_controller{0};
     frc::Joystick m_joystick{0};
@@ -83,6 +83,10 @@ private:
     Logging m_logging;
     Vision m_vision{this};
     Turret m_turret{this};
+    ClimbSubsystem m_climbSubsystem{};
+
+    OI m_oi{m_climbSubsystem};
+    
 
     cwtech::DebugVariable m_debugX = Variable("Joystick/X", {0.0});
     cwtech::DebugVariable m_debugY = Variable("Joystick/Y", {0.0});
