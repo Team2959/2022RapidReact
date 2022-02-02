@@ -21,7 +21,7 @@ private:
     static constexpr double m_turretMotorEncoderRatio = 1.0 / 462.0;
     rev::CANSparkMax m_turretMotor{29, rev::CANSparkMax::MotorType::kBrushless};
     rev::SparkMaxRelativeEncoder m_turretRelativeEncoder = m_turretMotor.GetEncoder();
-    frc::AnalogEncoder m_turretEncoder{3};
+    rev::SparkMaxAnalogSensor m_turretEncoder = m_turretMotor.GetAnalog(); 
     frc2::PIDController m_turretController{1, 0, 0};
 
     cwtech::DebugVariable m_rawAnalogOutput = Variable("Analog Encoder Output", 0.0);
@@ -29,7 +29,4 @@ private:
     cwtech::DebugVariable m_relativeEncoder = Variable("Relative Encoder Output", 0.0);
     cwtech::DebugVariable m_motorOuput = Variable("Direct Motor Output", 0.0);
     cwtech::DebugVariable m_initalAnalogOutput = Variable("Inital Analog Encoder Output", 0.0);
-    cwtech::DebugVariable m_min = Variable("Min", 0.0);
-    cwtech::DebugVariable m_max = Variable("Max", 0.0);
-    double m_lastValue;
 };

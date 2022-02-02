@@ -1,11 +1,20 @@
 {
   "NetworkTables Settings": {
     "mode": "Client",
-    "serverTeam": "1902"
+    "serverTeam": "2101"
   },
   "SmartDashboard": {
     "Robot": {
-      "Turret": {
+      "Drivetrain": {
+        "Pose": {
+          "open": true
+        },
+        "Swerve Module": {
+          "Back Left": {
+            "open": true
+          },
+          "open": true
+        },
         "open": true
       },
       "open": true
@@ -13,6 +22,6 @@
     "open": true
   },
   "limelight": {
-    "open": true
+    "open": false
   }
 }
