@@ -1,6 +1,5 @@
 
 #include <subsystems/Turret.h>
-#include <wpi/math>
 #include <iostream>
 
 Turret::Turret(cwtech::Debug* parent)
@@ -20,7 +19,7 @@ void Turret::DriveDegrees(double degrees)
 
 void Turret::Periodic()
 {
-    auto value = m_turretEncoder.GetPosition();
+    /*auto value =*/ m_turretEncoder.GetPosition();
 
     //std::cerr << value << std::endl;
     m_rawAnalogOutput.PutNumber(m_turretEncoder.GetPosition());

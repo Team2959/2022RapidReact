@@ -6,7 +6,7 @@
 #include <frc/controller/PIDController.h>
 #include <frc/AnalogEncoder.h>
 #include <cwtech/Debug.h>
-#include <wpi/math>
+#include <wpi/numbers>
 
 class Turret : public frc2::SubsystemBase, public cwtech::Debug
 {
@@ -16,8 +16,8 @@ public:
     void Periodic() override;
     void OnStartup();
 private:
-    static constexpr double TurretMin = -wpi::math::pi;
-    static constexpr double TurretMax = wpi::math::pi;
+    static constexpr double TurretMin = -wpi::numbers::pi;
+    static constexpr double TurretMax = wpi::numbers::pi;
     static constexpr double m_turretMotorEncoderRatio = 1.0 / 462.0;
     rev::CANSparkMax m_turretMotor{29, rev::CANSparkMax::MotorType::kBrushless};
     rev::SparkMaxRelativeEncoder m_turretRelativeEncoder = m_turretMotor.GetEncoder();
