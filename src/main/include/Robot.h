@@ -11,6 +11,8 @@
 #include "subsystems/Vision.h"
 #include <subsystems/Turret.h>
 #include <subsystems/Climb.h>
+#include <subsystems/Intake.h>
+#include <subsystems/Shooter.h>
 #include "cwtech/Logging.h"
 #include <cwtech/Debug.h>
 #include <OI.h>
@@ -36,6 +38,8 @@ private:
     Vision m_vision{this};
     Turret m_turret{this};
     Climb m_climbSubsystem{};
+    Shooter m_shooter{this};
+    Intake m_intake{this};
 
     OI m_oi{m_climbSubsystem};
     

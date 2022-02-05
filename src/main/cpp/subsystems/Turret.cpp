@@ -7,9 +7,9 @@ Turret::Turret(cwtech::Debug* parent)
 {
     m_turretMotor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
     m_turretMotor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
-    m_turretMotor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, 360);
-    m_turretMotor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, 360);
-    m_turretRelativeEncoder.SetPositionConversionFactor((1 / 462) * 360);
+    m_turretMotor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, 270);
+    m_turretMotor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, 270);
+    m_turretRelativeEncoder.SetPositionConversionFactor(360);
     m_turretController.SetFeedbackDevice(m_turretRelativeEncoder);
     m_turretController.SetFF(0.1);
 }
