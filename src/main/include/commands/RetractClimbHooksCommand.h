@@ -6,16 +6,16 @@
 
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/InstantCommand.h>
-#include <subsystems/ClimbSubsystem.h>
+#include <subsystems/Climb.h>
 
 
 class RetractClimbHooksCommand
     : public frc2::CommandHelper<frc2::InstantCommand,
                                  RetractClimbHooksCommand> {
  public:
-  RetractClimbHooksCommand(ClimbSubsystem &ClimbSubsystem);
+  RetractClimbHooksCommand(Climb &ClimbSubsystem);
 
   void Initialize() override;
   private:
-    ClimbSubsystem & m_climbSubsytem;
+    Climb & m_climbSubsytem;
 };

@@ -6,15 +6,15 @@
 
 #include <frc2/command/CommandHelper.h>
 #include <frc2/command/InstantCommand.h>
-#include <subsystems/ClimbSubsystem.h>
+#include <subsystems/Climb.h>
 
 class ExtendClimbHooksCommand
     : public frc2::CommandHelper<frc2::InstantCommand,
                                  ExtendClimbHooksCommand> {
  public:
-  ExtendClimbHooksCommand(ClimbSubsystem & climbSubsytem);
+  ExtendClimbHooksCommand(Climb & climbSubsytem);
 
   void Initialize() override;
   private:
-    ClimbSubsystem & m_climbSubsytem;
+    Climb & m_climbSubsytem;
 };

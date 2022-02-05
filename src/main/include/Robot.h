@@ -10,7 +10,7 @@
 #include "subsystems/Drivetrain.h"
 #include "subsystems/Vision.h"
 #include <subsystems/Turret.h>
-#include <subsystems/ClimbSubsystem.h>
+#include <subsystems/Climb.h>
 #include "cwtech/Logging.h"
 #include <cwtech/Debug.h>
 #include <OI.h>
@@ -35,7 +35,7 @@ private:
     Logging m_logging;
     Vision m_vision{this};
     Turret m_turret{this};
-    ClimbSubsystem m_climbSubsystem{};
+    Climb m_climbSubsystem{};
 
     OI m_oi{m_climbSubsystem};
     

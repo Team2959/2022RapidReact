@@ -8,10 +8,10 @@
 #include <frc/Solenoid.h>
 #include <RobotMap.h>
 
-class ClimbSubsystem : public frc2::SubsystemBase
+class Climb : public frc2::SubsystemBase
 {
  public:
-  ClimbSubsystem();
+  Climb();
 
   /**
    * Will be called periodically whenever the CommandScheduler runs.

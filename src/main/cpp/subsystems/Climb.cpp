@@ -2,18 +2,18 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-#include "subsystems/ClimbSubsystem.h"
+#include "subsystems/Climb.h"
 
-ClimbSubsystem::ClimbSubsystem() = default;
+Climb::Climb() = default;
 
 // This method will be called once per scheduler run
-void ClimbSubsystem::Periodic() {}
+void Climb::Periodic() {}
 
-void ClimbSubsystem::ExtendClimbHooks()
+void Climb::ExtendClimbHooks()
 {
     m_climbSolenoid.Set(true);
 }
-void ClimbSubsystem::RetractClimbHooks()
+void Climb::RetractClimbHooks()
 {
     m_climbSolenoid.Set(false);
 }

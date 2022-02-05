@@ -4,12 +4,12 @@
 #include <cwtech/Conditioning.h>
 #include <frc/XboxController.h>
 #include <RobotMap.h>
-#include <subsystems/ClimbSubsystem.h>
+#include <subsystems/Climb.h>
 
 class OI
 {
 public:
-    OI(ClimbSubsystem & climbSubsytem);
+    OI(Climb & climbSubsytem);
     cwtech::UniformConditioning m_xConditioning{};
     cwtech::UniformConditioning m_yConditioning{};
     cwtech::UniformConditioning m_rotationConditioning{};

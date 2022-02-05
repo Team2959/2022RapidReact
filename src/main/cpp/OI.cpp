@@ -4,7 +4,7 @@
 #include <commands/ExtendClimbHooksCommand.h>
 #include <commands/RetractClimbHooksCommand.h>
 
-OI::OI(ClimbSubsystem & climbSubsytem)
+OI::OI(Climb & climbSubsytem)
 {
     m_xConditioning.SetDeadband(0.15);
     m_xConditioning.SetExponent(1.3);
