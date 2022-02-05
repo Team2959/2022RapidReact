@@ -5,34 +5,25 @@
 Turret::Turret(cwtech::Debug* parent)
     : cwtech::Debug("Turret", parent)
 {
-    m_turretEncoder.SetPositionConversionFactor(4096 / 360);
+    m_turretMotor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, true);
+    m_turretMotor.EnableSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, true);
+    m_turretMotor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kForward, 360);
+    m_turretMotor.SetSoftLimit(rev::CANSparkMax::SoftLimitDirection::kReverse, 360);
+    m_turretRelativeEncoder.SetPositionConversionFactor((1 / 462) * 360);
+    m_turretController.SetFeedbackDevice(m_turretRelativeEncoder);
+    m_turretController.SetFF(0.1);
 }
 
-void Turret::DriveDegrees(double degrees)
+void Turret::SetDesiredAngle(units::degree_t degrees)
 {
-    //auto destination = m_turretEncoder.GetDistance() + degrees;
-    //if(destination > TurretMax || destination < TurretMin)
-    //{
-    //}
-    //m_turretController.SetSetpoint(degrees);
+    m_turretController.SetReference(degrees.to<double>(), rev::ControlType::kPosition);
 }
 
 void Turret::Periodic()
 {
-    /*auto value =*/ m_turretEncoder.GetPosition();
-
-    //std::cerr << value << std::endl;
-    m_rawAnalogOutput.PutNumber(m_turretEncoder.GetPosition());
-    //m_analogDistance.PutNumber(m_turretEncoder.GetPosition() * (360 / 4.62));
     m_relativeEncoder.PutNumber(m_turretRelativeEncoder.GetPosition());
-    m_motorOuput.PutNumber(m_turretMotor.Get());
-    /*if(!m_turretController.AtSetpoint())
-    {
-        m_turretMotor.Set(m_turretController.Calculate(m_turretEncoder.GetDistance()));
-    }*/
 }
 
 void Turret::OnStartup()
 {
-    m_initalAnalogOutput.PutNumber(m_turretEncoder.GetPosition());
 }
