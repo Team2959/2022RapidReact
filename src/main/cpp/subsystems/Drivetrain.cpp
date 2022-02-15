@@ -11,6 +11,17 @@
 
 #include <frc/smartdashboard/SmartDashboard.h>
 
+Drivetrain::Drivetrain(Debug* parent)
+	: cwtech::Debug("Drivetrain", parent)
+{
+	SetName("Drivetrain"); // Sets name of subsystem
+	m_navX.Reset();
+	
+	m_driveType.AddOption("Double", DriveType::Double);
+	m_driveType.AddOption("Xbox", DriveType::Xbox);
+	m_driveType.SetDefaultOption("Single", DriveType::Single);
+}
+
 void Drivetrain::Drive(units::meters_per_second_t xSpeed,
 					   units::meters_per_second_t ySpeed,
 					   units::radians_per_second_t rot, bool fieldRelative)
@@ -28,8 +39,6 @@ void Drivetrain::Drive(units::meters_per_second_t xSpeed,
 	m_frontRight.SetDesiredState(fr);
 	m_backLeft.SetDesiredState(bl);
 	m_backRight.SetDesiredState(br);
-
-	
 }
 
 void Drivetrain::Periodic()

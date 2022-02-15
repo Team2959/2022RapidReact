@@ -16,7 +16,7 @@ Turret::Turret(cwtech::Debug* parent)
 
 void Turret::SetDesiredAngle(units::degree_t degrees)
 {
-    m_turretController.SetReference(degrees.to<double>(), rev::ControlType::kPosition);
+    m_turretController.SetReference(degrees.to<double>(), rev::CANSparkMax::ControlType::kPosition);
 }
 
 void Turret::Periodic()

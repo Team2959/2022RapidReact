@@ -10,6 +10,7 @@
 #include <frc/DigitalInput.h>
 #include <frc/DutyCycle.h>
 #include <frc/Solenoid.h>
+#include <RobotMap.h>
 
 class Shooter : public frc2::SubsystemBase, public cwtech::Debug
 {
@@ -21,9 +22,9 @@ public:
     void Feed(bool value);
     double GetSpeed();
 private:
-    rev::CANSparkMax m_left{7, rev::CANSparkMax::MotorType::kBrushless};
-    rev::CANSparkMax m_right{8, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_left{kShooterPrimaryCanSparkMaxMotor, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_right{kShooterFollowerCanSparkMaxMotor, rev::CANSparkMax::MotorType::kBrushless};
     rev::SparkMaxPIDController m_controller = m_left.GetPIDController();
     rev::SparkMaxRelativeEncoder m_encoder{m_left.GetEncoder()};
-    frc::Solenoid m_feeder{frc::PneumaticsModuleType::REVPH, 1}; // TODO actual value
+    frc::Solenoid m_feeder{frc::PneumaticsModuleType::REVPH, kFeederSolenoid};
 };

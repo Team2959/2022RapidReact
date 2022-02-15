@@ -9,6 +9,7 @@
 #include <wpi/numbers>
 #include <frc/DigitalInput.h>
 #include <frc/DutyCycle.h>
+#include <RobotMap.h>
 
 class Turret : public frc2::SubsystemBase, public cwtech::Debug
 {
@@ -21,10 +22,10 @@ private:
     static constexpr double TurretMin = -wpi::numbers::pi;
     static constexpr double TurretMax = wpi::numbers::pi;
     static constexpr double m_turretMotorEncoderRatio = 1.0 / 462.0;
-    rev::CANSparkMax m_turretMotor{29, rev::CANSparkMax::MotorType::kBrushless};
+    rev::CANSparkMax m_turretMotor{kTurretCanSparkMaxMotor, rev::CANSparkMax::MotorType::kBrushless};
     rev::SparkMaxPIDController m_turretController = m_turretMotor.GetPIDController();
     rev::SparkMaxAlternateEncoder m_turretRelativeEncoder{m_turretMotor.GetAlternateEncoder(rev::SparkMaxAlternateEncoder::Type::kQuadrature, 4096)};
-    frc::DigitalInput m_turretDutyCycleEncoderInput{5}; // TODO give actual value
+    frc::DigitalInput m_turretDutyCycleEncoderInput{kTurretPulseWidthDigIo};
     frc::DutyCycle m_turretDutyCycleEncoder{m_turretDutyCycleEncoderInput};
     units::degree_t m_offset;
 

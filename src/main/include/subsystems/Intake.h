@@ -4,6 +4,7 @@
 #include <cwtech/Debug.h>
 #include <frc/Solenoid.h>
 #include <rev/CANSparkMax.h>
+#include <RobotMap.h>
 
 class Intake : public frc2::SubsystemBase, public cwtech::Debug
 {
@@ -15,6 +16,6 @@ public:
     void Stop();
 private:
     static constexpr double m_motorSpeed = 0.2;
-    frc::Solenoid m_arms{frc::PneumaticsModuleType::REVPH, 1}; // TODO actual value
-    rev::CANSparkMax m_motor{56, rev::CANSparkMax::MotorType::kBrushless}; // TODO actual value
+    frc::Solenoid m_arms{frc::PneumaticsModuleType::REVPH, kIntakeArmsSolenoid}; // TODO actual value
+    rev::CANSparkMax m_motor{kIntakeCanSparkMaxMotor, rev::CANSparkMax::MotorType::kBrushless}; // TODO actual value
 };

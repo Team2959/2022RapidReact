@@ -17,11 +17,11 @@
 
 #include "subsystems/SwerveModule.h"
 #include <frc2/command/SubsystemBase.h>
+#include <RobotMap.h>
 
 class Drivetrain : public cwtech::Debug, public frc2::SubsystemBase
 {
 public:
-
 	enum DriveType
 	{
 		Xbox,
@@ -29,16 +29,7 @@ public:
 		Double,
 	};
 
-	Drivetrain(Debug* parent = nullptr)
-		: cwtech::Debug("Drivetrain", parent)
-	{
-		SetName("Drivetrain"); // Sets name of subsystem
-		m_navX.Reset();
-		
-		m_driveType.AddOption("Double", DriveType::Double);
-		m_driveType.AddOption("Xbox", DriveType::Xbox);
-		m_driveType.SetDefaultOption("Single", DriveType::Single);
-	}
+	Drivetrain(Debug* parent = nullptr);
 
 	void Drive(units::meters_per_second_t xSpeed,
 			   units::meters_per_second_t ySpeed, units::radians_per_second_t rot,
@@ -106,10 +97,10 @@ private:
 	cwtech::DebugVariable m_poseX = Variable("Pose/X", 0.0);
 	cwtech::DebugVariable m_poseY = Variable("Pose/Y", 0.0);
 
-	SwerveModule m_frontLeft{1, 11, 5, "Front Left", ZeroedFrontLeft, this};
-	SwerveModule m_frontRight{2, 12, 6, "Front Right", ZeroedFrontRight, this};
-	SwerveModule m_backLeft{4, 14, 7, "Back Left", ZeroedBackLeft, this};
-	SwerveModule m_backRight{3, 13, 8, "Back Right", ZeroedBackRight, this};
+	SwerveModule m_frontLeft{kFrontLeftDriveCanSparkMaxMotor, kFrontLeftTurnCanSparkMaxMotor, kFrontLeftTurnPulseWidthDigIo, "Front Left", ZeroedFrontLeft, this};
+	SwerveModule m_frontRight{kFrontRightDriveCanSparkMaxMotor, kFrontRightTurnCanSparkMaxMotor, kFrontRightTurnPulseWidthDigIo, "Front Right", ZeroedFrontRight, this};
+	SwerveModule m_backRight{kBackRightDriveCanSparkMaxMotor, kBackRightTurnCanSparkMaxMotor, kBackRightTurnPulseWidthDigIo, "Back Right", ZeroedBackRight, this};
+	SwerveModule m_backLeft{kBackLeftDriveCanSparkMaxMotor, kBackLeftTurnCanSparkMaxMotor, kBackLeftTurnPulseWidthDigIo, "Back Left", ZeroedBackLeft, this};
 
 	AHRS m_navX{frc::SPI::kMXP};
 

@@ -24,4 +24,3 @@ void Intake::Stop()
 {
     m_motor.Set(0);
 }
-
