@@ -14,7 +14,7 @@ Robot::Robot() : cwtech::Debug("Robot")
 void Robot::RobotInit()
 {
     m_swerve.SetDefaultCommand(TeleopDriveCommand(&m_swerve, m_oi));
-    m_vision.SetDefaultCommand(FollowTargetCommand(&m_vision, m_oi));
+    m_vision.SetDefaultCommand(FollowTargetCommand(&m_vision, &m_turret, m_oi));
     m_turret.OnStartup();
     m_swerve.Startup();
 }
@@ -46,6 +46,10 @@ void Robot::TeleopPeriodic()
     // DriveWithJoystick(true);
     auto logLine = m_swerve.OutputOdometry();
     m_logging.Log(logLine);
+
+    double rpm = m_testShooter.GetNumber(0.0);
+    if(m_testRun.GetBoolean(false))
+        m_shooter.SetSpeed(rpm);
 }
 
 void Robot::TestPeriodic()

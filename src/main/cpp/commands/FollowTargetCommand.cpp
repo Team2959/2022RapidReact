@@ -3,30 +3,17 @@
 
 #include <iostream>
 
-FollowTargetCommand::FollowTargetCommand(Vision* vision, OI& oi)
-    : m_vision(vision), m_oi(oi)
+FollowTargetCommand::FollowTargetCommand(Vision* vision, Turret* turret, OI& oi)
+    : m_vision(vision), m_oi(oi), m_turret(turret)
 {
     AddRequirements(m_vision);
+    AddRequirements(m_turret);
 }
 
 void FollowTargetCommand::Execute()
-{/*
+{
     double a = nt::NetworkTableInstance::GetDefault().GetTable("limelight")->GetNumber("tx",0.0);
-    if(a < 2 && a > -2)
-    {
-        m_vision->m_turret.Set(0.0);
-    }
-    else
-    {
-        if(a > 0)
-        {
-            m_vision->m_turret.Set(0.15);
-        }
-        else
-        {
-            m_vision->m_turret.Set(-0.15);
-        }
-    }*/
+    m_turret->SetDesiredAngle(units::degree_t{a});
 }
 
 void FollowTargetCommand::End(bool interupt)

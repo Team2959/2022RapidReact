@@ -50,6 +50,8 @@ private:
     cwtech::DebugVariable m_testMotorCorner = Variable("Test/Test Motor Corner", {1.0});
     cwtech::DebugVariable m_testMotorPercentage = Variable("Test/Motor Percentage", {0.0});
     cwtech::DebugVariable m_time = Variable("Runtime", 0.0);
+    cwtech::DebugVariable m_testShooter = Variable("Test/Shooter Velocity", 0.0);
+    cwtech::DebugVariable m_testRun = Variable("Test/Shooter Run", false);
     double m_startTimestamp = 0;
     bool m_haveSetInitalPositions = false;
 
