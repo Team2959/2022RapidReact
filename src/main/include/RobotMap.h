@@ -43,3 +43,8 @@ constexpr int kButtonBox = 3;
 // Co-Pilot Buttons
 constexpr int kExtendClimbHooks = 4;
 constexpr int kRetractClimbHooks = 5;
+constexpr int kReverseIntake = 10;
+
+// Driver Buttons
+constexpr int kIntakeToggle = 2;
+

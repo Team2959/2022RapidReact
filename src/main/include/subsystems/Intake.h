@@ -10,10 +10,9 @@ class Intake : public frc2::SubsystemBase, public cwtech::Debug
 {
 public:
     Intake(cwtech::Debug* parent = nullptr);
-    void Extend();
-    void Retract();
-    void Start();
-    void Stop();
+    void ToggleIntake();
+    void ReverseIntake();
+    void RestoreIntakeDirection();
 private:
     static constexpr double m_motorSpeed = 0.2;
     frc::Solenoid m_arms{frc::PneumaticsModuleType::REVPH, kIntakeArmsSolenoid}; // TODO actual value

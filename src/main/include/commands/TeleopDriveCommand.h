@@ -11,7 +11,7 @@ class TeleopDriveCommand : public frc2::CommandHelper<frc2::CommandBase, TeleopD
 public:
     explicit TeleopDriveCommand(Drivetrain* drivetrain, OI& oi);
     void Execute() override;
-    void End(bool interupt);
+    void End(bool interupt) override;
 private:
     Drivetrain* m_drivetrain;
     OI& m_oi;

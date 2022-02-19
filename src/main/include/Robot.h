@@ -41,7 +41,7 @@ private:
     Shooter m_shooter{this};
     Intake m_intake{this};
 
-    OI m_oi{m_climbSubsystem};
+    OI m_oi{m_climbSubsystem, m_intake};
     
 
     cwtech::DebugVariable m_debugX = Variable("Joystick/X", {0.0});

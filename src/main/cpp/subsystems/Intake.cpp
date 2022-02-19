@@ -5,22 +5,30 @@ Intake::Intake(cwtech::Debug* parent)
 {
 }
 
-void Intake::Extend()
+void Intake::ToggleIntake() 
 {
-    m_arms.Set(true);
+    if (m_arms.Get() == true) 
+    {
+        m_arms.Set(false);
+        m_motor.Set(m_motorSpeed);
+    }
+    else
+    {
+        m_arms.Set(true);
+        m_motor.Set(0);
+    }
 }
 
-void Intake::Retract()
+void Intake::ReverseIntake()
 {
-    m_arms.Set(false);
+    if (m_arms.Get() == true)
+    {
+        m_motor.Set(-m_motorSpeed);
+    }
 }
 
-void Intake::Start()
+void Intake::RestoreIntakeDirection()
 {
     m_motor.Set(m_motorSpeed);
 }
 
-void Intake::Stop()
-{
-    m_motor.Set(0);
-}
